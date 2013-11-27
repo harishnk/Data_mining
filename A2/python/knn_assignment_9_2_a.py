@@ -23,7 +23,7 @@ df['Flight Status'].replace(to_replace=['ontime', 'delayed'], value=[0,1], inpla
 
  
 #features = ['Age', 'Experience', 'Income', 'Family', 'CCAvg', 'Mortgage', 'Securities.Account', 'CD.Account', 'Online', 'CreditCard', 'dUndergrad', 'dGrad']
-features = ['CRS_DEP_TIME', 'CARRIER', 'DEP_TIME', 'DEST', 'DISTANCE', 'FL_DATE', 'FL_NUM', 'ORIGIN', 'Weather', 'DAY_WEEK', 'DAY_OF_MONTH', 'TAIL_NUM']
+#features = ['CRS_DEP_TIME', 'CARRIER', 'DEP_TIME', 'DEST', 'DISTANCE', 'FL_DATE', 'FL_NUM', 'ORIGIN', 'Weather', 'DAY_WEEK', 'DAY_OF_MONTH', 'TAIL_NUM']
 outcome = ['Flight Status']
 #excludes field 'DEP_TIME', the actual departure time as it cannot be used as predictor
 #data = ['CRS_DEP_TIME', 'CARRIER', 'DEST', 'DISTANCE', 'FL_DATE', 'FL_NUM', 'ORIGIN', 'Weather', 'DAY_WEEK', 'DAY_OF_MONTH', 'TAIL_NUM', 'Flight Status']
@@ -65,7 +65,7 @@ DummiesAndBinsHeader = list(validate.columns.values) #.remove('Flight Status')
 DummiesAndBinsHeader.remove('Flight Status')
 #print DummiesAndBinsHeader
 
-clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=5)
+clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=6)
 clf = clf.fit(train[DummiesAndBinsHeader], train['Flight Status'])
 
 clf.predict(validate[DummiesAndBinsHeader])

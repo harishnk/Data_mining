@@ -27,10 +27,16 @@ neighbors = 6
 clf = KNeighborsClassifier(n_neighbors=neighbors)
 clf.fit(train[features], train['Personal.Loan'])
 
-preds = clf.predict(validate[features])
-accuracy = np.where(preds==validate['Personal.Loan'], 1, 0).sum() / float(len(validate))
+predsTrain = clf.predict(train[features])
+accuracy = np.where(predsTrain==train['Personal.Loan'], 1, 0).sum() / float(len(train))
+print "Train: Neighbors: %d, Accuracy: %3f" % (neighbors, accuracy)
+cm = confusion_matrix(train['Personal.Loan'], predsTrain)
+print cm
+
+predsValidate = clf.predict(validate[features])
+accuracy = np.where(predsValidate==validate['Personal.Loan'], 1, 0).sum() / float(len(validate))
 print "Validate: Neighbors: %d, Accuracy: %3f" % (neighbors, accuracy)
-cm = confusion_matrix(validate['Personal.Loan'], preds)
+cm = confusion_matrix(validate['Personal.Loan'], predsValidate)
 print cm
 
 
